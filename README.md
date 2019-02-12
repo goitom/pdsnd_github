@@ -5,11 +5,10 @@ Created 11 February 2019
 
 
 ### Description
-Describe what your project is about and what it does
+This project allows the user to interactively explore bikeshare data from three cities (Chicago, New York, Washington D.C.). The user is prompted to select a city and either observations filtered by a particular month, or from all months in the dataset. The user is then presented with summary statistics, and allowed to view a slice of the raw data if they so choose.
 
 ### Files used
-Include the files used
+
 
 ### Credits
-It's important to give proper credit. Add links to any repo that inspired you or blogposts you consulted.
 
