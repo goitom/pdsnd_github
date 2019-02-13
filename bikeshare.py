@@ -27,8 +27,8 @@ def get_filters():
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('Hello! Let\'s explore some US bikeshare data!')
-    # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
-    # load data file into a dataframe
+    # get user input for city (chicago, new york city, washington).
+
     city = input("Which city (Chicago, New York City or Washington) would you like to explore? ").lower()
     while city not in valid_city_list:
         city = input("Please enter one of the following city names verbatim: Chicago, New York City or Washington. " ).lower()
@@ -63,6 +63,7 @@ def load_data(city, month, day):
 
     # add city name as a column
     df['city'] = city.lower()
+    
     # convert the Start Time column to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
 
@@ -81,6 +82,7 @@ def load_data(city, month, day):
 
     # filter by day of week if applicable
     if day != 'all':
+
         # filter by day of week to create the new dataframe
         df = df[df['day_of_week'] == day.title()]
     return df
@@ -89,6 +91,7 @@ def load_data(city, month, day):
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
 
+    # Indicate that calcuation has started 
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
 
