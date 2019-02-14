@@ -17,22 +17,31 @@ month_name_dict = {1: "January",
                    5: "May",
                    6: "June"}
 
-def get_filters():
+def get_city():
     """
-    Asks user to specify a city, month, and day to analyze.
+    Asks user to specify a city to analyze.
 
     Returns:
         (str) city - name of the city to analyze
-        (str) month - name of the month to filter by, or "all" to apply no month filter
-        (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('Hello! Let\'s explore some US bikeshare data!')
-    # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
-    # load data file into a dataframe
+    # get user input for city (chicago, new york city, washington).
     city = input("Which city (Chicago, New York City or Washington) would you like to explore? ").lower()
     while city not in valid_city_list:
         city = input("Please enter one of the following city names verbatim: Chicago, New York City or Washington. " ).lower()
 
+
+
+    print('-'*40)
+    return city, month, day
+
+def get_month():
+	"""
+	Asks user to specify a month to analyze.
+
+    Returns:
+        (str) month - name of the month to filter by, or "all" to apply no month filter
+    """
     # get user input for month (all, january, february, ... , june)
     month = input("Which month (january thru june) would you like to explore? Type the full name of the month--no abbreviations--or type 'all' (no quotation marks) to get info for all months) ").lower()
     while month not in valid_month_list:
@@ -43,10 +52,18 @@ def get_filters():
     while day not in valid_day_of_week_list:
         day = input("Please enter a valid day (full name, no abbreviations) or 'all' (no quotation marks) for info on all days ").lower()
 
+def get_day():
+	"""
+	Asks user to specify a day to analyze.
 
-    print('-'*40)
-    return city, month, day
+    Returns:
+        (str) day - name of the day of week to filter by, or "all" to apply no day filter
+    """
 
+    # get user input for day of week (all, monday, tuesday, ... sunday)
+    day = input("Which day of the week would you like to explore? Type the full name of the day--no abbreviations--or type 'all' (no quotation marks) to get info for all days of the week) ").lower()
+    while day not in valid_day_of_week_list:
+        day = input("Please enter a valid day (full name, no abbreviations) or 'all' (no quotation marks) for info on all days ").lower()
 
 def load_data(city, month, day):
     """
@@ -181,7 +198,9 @@ def display_data(df):
         i+=5
 def main():
     while True:
-        city, month, day = get_filters()
+        city = get_city()
+        month = get_month()
+        day = get_day()
         df = load_data(city, month, day)
 
         time_stats(df)
