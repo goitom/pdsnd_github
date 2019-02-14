@@ -29,15 +29,12 @@ def get_city():
     city = input("Which city (Chicago, New York City or Washington) would you like to explore? ").lower()
     while city not in valid_city_list:
         city = input("Please enter one of the following city names verbatim: Chicago, New York City or Washington. " ).lower()
-
-
-
     print('-'*40)
-    return city, month, day
+    return city
 
 def get_month():
-	"""
-	Asks user to specify a month to analyze.
+    """
+    Asks user to specify a month to analyze.
 
     Returns:
         (str) month - name of the month to filter by, or "all" to apply no month filter
@@ -46,25 +43,19 @@ def get_month():
     month = input("Which month (january thru june) would you like to explore? Type the full name of the month--no abbreviations--or type 'all' (no quotation marks) to get info for all months) ").lower()
     while month not in valid_month_list:
         month = input("Please enter a valid month (january thru june, full name, no abbreviations) or 'all' (no quotation marks) for info on all months ").lower()
-
-    # get user input for day of week (all, monday, tuesday, ... sunday)
-    day = input("Which day of the week would you like to explore? Type the full name of the day--no abbreviations--or type 'all' (no quotation marks) to get info for all days of the week) ").lower()
-    while day not in valid_day_of_week_list:
-        day = input("Please enter a valid day (full name, no abbreviations) or 'all' (no quotation marks) for info on all days ").lower()
-
+    return month
 def get_day():
-	"""
-	Asks user to specify a day to analyze.
+    """
+    Asks user to specify a day to analyze.
 
     Returns:
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
-
     # get user input for day of week (all, monday, tuesday, ... sunday)
     day = input("Which day of the week would you like to explore? Type the full name of the day--no abbreviations--or type 'all' (no quotation marks) to get info for all days of the week) ").lower()
     while day not in valid_day_of_week_list:
         day = input("Please enter a valid day (full name, no abbreviations) or 'all' (no quotation marks) for info on all days ").lower()
-
+    return day
 def load_data(city, month, day):
     """
     Loads data for the specified city and filters by month and day if applicable.
@@ -78,6 +69,7 @@ def load_data(city, month, day):
     """
     df = pd.read_csv(CITY_DATA[city])
 
+    print(city)
     # add city name as a column
     df['city'] = city.lower()
     # convert the Start Time column to datetime
@@ -175,14 +167,14 @@ def user_stats(df):
     # Display counts of user types
     print("Count of User Types: {}".format(df["User Type"].value_counts()))
 
-    
-    if df['city'][0] != 'washington':
-        # Display counts of gender
-        print("\nCount of Gender: {}".format(df["Gender"].value_counts()))
-        # Display earliest, most recent, and most common year of birth
-        print("\nEarliest birth year: {}.".format(df["Birth Year"].min()))
-        print("Most recent birth year: {}.".format(df["Birth Year"].max()))
-        print("Most common birth year: {}.".format(df["Birth Year"].mode()[0]))
+    print(df['city'][0])
+#     if df['city'][0] != 'washington':
+#         # Display counts of gender
+#         print("\nCount of Gender: {}".format(df["Gender"].value_counts()))
+#         # Display earliest, most recent, and most common year of birth
+#         print("\nEarliest birth year: {}.".format(df["Birth Year"].min()))
+#         print("Most recent birth year: {}.".format(df["Birth Year"].max()))
+#         print("Most common birth year: {}.".format(df["Birth Year"].mode()[0]))
 
 
     print("\nThis took %s seconds." % (time.time() - start_time))
@@ -215,4 +207,4 @@ def main():
 
 
 if __name__ == "__main__":
-	main()
+    main()
